@@ -30,7 +30,17 @@
 
 					echo("<h1>".$heading."</h1>");
 	        
-					echo($content);
+					if (isset($content)) {
+						
+						echo($content);
+
+					}
+
+					if (isset($include)) {
+
+						include($include);
+
+					}
         
 				?>
 

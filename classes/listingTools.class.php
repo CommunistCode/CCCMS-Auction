@@ -368,13 +368,12 @@
 
 		public function renderRunningListings($orderBy, $inOrder, $limit) {
 
-			echo("<table>");
-			
-			echo("<tr>");
-			echo("<td width=400>Title</td>");
-			echo("<td width=150>Price</td>");
-			echo("<td width=200>Time Remaining</td>");
-			echo("</tr>");
+			$output  = "<table>";
+			$output .= "<tr>";
+			$output .= "<td width=400>Title</td>";
+			$output .= "<td width=150>Price</td>";
+			$output .= "<td width=200>Time Remaining</td>";
+			$output .="</tr>";
 
 			$db = new dbConn();
 
@@ -390,28 +389,30 @@
 
 				$highestBidInfo = $runningListing->getHighestBid();
 
-				echo("<tr>");
-				echo("<td><a href='viewListing.php?id=".$runningListing->getID()."'>".$runningListing->getTitle()."</a></td>");
+				$output .= "<tr>";
+				$output .= "<td><a href='viewListing.php?id=".$runningListing->getID()."'>".$runningListing->getTitle()."</a></td>";
 
 				if ($highestBidInfo) {
 
-					echo("<td>".$highestBidInfo['currentPrice']."</td>");
+					$output .= "<td>".$highestBidInfo['currentPrice']."</td>";
 
 			
 				}
 
 				else {
 
-					echo("<td>".$runningListing->getStartPrice()."</td>");
+					$output .= "<td>".$runningListing->getStartPrice()."</td>";
 
 				}
 
-				echo("<td>".$runningListing->getTimeRemaining()."</td>");
-				echo("</tr>");
+				$output .= "<td>".$runningListing->getTimeRemaining()."</td>";
+				$output .= "</tr>";
 
 			}
 	
-			echo("</table>");
+			$output .= "</table>";
+
+			return $output;
 
 		}
 
