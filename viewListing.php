@@ -18,7 +18,6 @@
 
 	$header = "Running Listing";
 
+	require_once("includes/template.inc.php");
+
 ?>
-
-				
-
