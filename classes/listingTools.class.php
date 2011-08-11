@@ -216,7 +216,7 @@
 		public function renderListing($listing) {
 
 			$output  = "<form method='post' action='confirmBid.php'>";
-			$output .= "input type='hidden' name='listingID' value='".$listing->getID()."' />";
+			$output .= "<input type='hidden' name='listingID' value='".$listing->getID()."' />";
 			$output .= "<table>";
 			$output .= "<tr>";
 			$output .= "<td>Listing ID: ".$listing->getID()."</td>";
