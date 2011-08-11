@@ -2,6 +2,7 @@
 
 	require_once("../config/config.php");
 	require_once("../includes/global.inc.php");
+	require_once($fullPath."/membership/includes/checkLogin.inc.php");
 	require_once($fullPath."/auction/classes/listingTools.class.php");
 
 	$listingTools = new listingTools();
