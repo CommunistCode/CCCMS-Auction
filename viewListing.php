@@ -16,7 +16,7 @@
 	$runningListing = $listingTools->getRunningListingObject($_GET['id']);
 	$content = $listingTools->renderListing($runningListing);
 
-	$heading = "Running Listing";
+	$heading = "View Listing";
 
 	require_once("includes/template.inc.php");
 
