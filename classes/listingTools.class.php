@@ -215,56 +215,58 @@
 
 		public function renderListing($listing) {
 
-			echo("<form method='post' action='confirmBid.php'>");
-			echo("<input type='hidden' name='listingID' value='".$listing->getID()."' />");
-			echo("<table>");
-			echo("<tr>");
-			echo("<td>Listing ID: ".$listing->getID()."</td>");
-			echo("</tr>");
-			echo("<tr>");
-			echo("<td>".$listing->getTitle()."</td>");
-			echo("</tr>");
-			echo("<tr>");
-			echo("<td>".$listing->getDescription()."</td>");
-			echo("</tr>");
-			echo("<tr>");
-			echo("<td>");
+			$output  = "<form method='post' action='confirmBid.php'>";
+			$output .= "input type='hidden' name='listingID' value='".$listing->getID()."' />";
+			$output .= "<table>";
+			$output .= "<tr>";
+			$output .= "<td>Listing ID: ".$listing->getID()."</td>";
+			$output .= "</tr>";
+			$output .= "<tr>";
+			$output .= "<td>".$listing->getTitle()."</td>";
+			$output .= "</tr>";
+			$output .= "<tr>";
+			$output .= "<td>".$listing->getDescription()."</td>";
+			$output .= "</tr>";
+			$output .= "<tr>";
+			$output .= "<td>";
 
 			$highBidInfo = $listing->getHighestBid();
 
 			if ($highBidInfo) {
 
-				echo("<input type='text' size='10' name='bidAmount' value='".$highBidInfo['currentPrice']."' />");
-				echo("<input type='submit' name='newBid' value='Place Bid' />");
+				$output .= "<input type='text' size='10' name='bidAmount' value='".$highBidInfo['currentPrice']."' />";
+				$output .= "<input type='submit' name='newBid' value='Place Bid' />";
 		
 				$minBid = $listing->getLowestBidAmount()+$highBidInfo['currentPrice'];
 				$minBidFormatted = sprintf("%01.2f", $minBid);
 
-				echo(" - Min Bid: ".$minBidFormatted);
-				echo("(".$highBidInfo['username'].")");	
+				$output .= " - Min Bid: ".$minBidFormatted;
+				$output .= "(".$highBidInfo['username'].")";	
 
 			}
 
 			else {
 
-				echo("<input type='text' size='10' name='bidAmount' value='".$listing->getStartPrice()."' />");
-				echo("<input type='submit' name='newBid' value='Place Bid' />");
+				$output .= "<input type='text' size='10' name='bidAmount' value='".$listing->getStartPrice()."' />";
+				$output .= "<input type='submit' name='newBid' value='Place Bid' />";
 
 				$minBid = $listing->getStartPrice() + $listing->getLowestBidAmount();
 				$minBidFormatted = sprintf("%01.2f", $minBid);
 
-				echo(" - Min Bid: ".$minBidFormatted);
+				$output .= " - Min Bid: ".$minBidFormatted;
 
 			}
 
-			echo("</td>");
-			echo("</tr>");
-			echo("<tr>");
-			echo("<td>".$listing->getTimeRemaining()."</td>");
-			echo("</tr>");
-			echo("</table>");
-			echo("</form>");
-			echo("<br />");
+			$output .= "</td>";
+			$output .= "</tr>";
+			$output .= "<tr>";
+			$output .= "<td>".$listing->getTimeRemaining()."</td>";
+			$output .= "</tr>";
+			$output .= "</table>";
+			$output .= "</form>";
+			$output .= "<br />";
+
+			return $output;
 
 		}
 		
