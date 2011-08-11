@@ -1,6 +1,6 @@
 <?php
 
-	require_once("../includes/global.inc.php");
+	require_once($fullPath . "/includes/global.inc.php");
 	require_once($fullPath . "/classes/dbConn.class.php");
 
 	class updateAuction {
@@ -9,7 +9,7 @@
 
 			$db = new dbConn();	
 
-			if ($this->update_1_0_1()) {
+			if ($this->update_1_0_1($db)) {
 
 				echo("All updates were sucessful!<br />");
 
@@ -17,7 +17,7 @@
 			
 		}
 
-		private function update_1_0_1() {
+		private function update_1_0_1($db) {
 
 			$query = "ALTER TABLE listings ADD listingType INT";
 
