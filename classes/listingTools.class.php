@@ -6,6 +6,14 @@
 
 	class listingTools {
 
+		public function stopFinishedListings() {
+
+			$db = new dbConn();
+
+			$db->update("runningListings","listingRunning=0","endDate < ".time()."",0);
+
+		}
+		
 		public function getDynamicContentID() {
 
 			$db = new dbConn();

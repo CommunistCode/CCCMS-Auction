@@ -6,9 +6,11 @@
 
 	$listingTools = new listingTools();
 
+	$listingTools->stopFinishedListings();
+	
 	$content = $listingTools->renderRunningListings("endDate","ASC",10);
 
-	$heading = "Running Listings";
+	$heading = "Active Listings";
 
 	require_once("includes/template.inc.php");
 
