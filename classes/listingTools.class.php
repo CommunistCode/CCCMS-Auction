@@ -359,7 +359,7 @@
 
 			echo("<table>");
 			
-			echo("<tr>");
+			echo("<tr class='tableHeader'>");
 			echo("<td width=300>Title</td>");
 			echo("<td width=150>Price</td>");
 			echo("<td width=150>Time Remaining</td>");
