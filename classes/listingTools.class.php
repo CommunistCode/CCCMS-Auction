@@ -373,7 +373,8 @@
 
 			$result = $db->mysqli->query("SELECT * 
 																		FROM runningListings 
-																		WHERE memberID=".$member->getID()); 
+																		WHERE memberID=".$member->getID()."
+																		ORDER BY endDate DESC"); 
 		
 			while ($row = $result->fetch_assoc()) {
 
