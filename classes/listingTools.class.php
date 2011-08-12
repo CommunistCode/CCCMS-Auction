@@ -118,8 +118,8 @@
 									".$listing->getType().",
 									".$listing->getQuantity().",
 									".$listing->getStartPrice().",
-									'".$listing->getTitle()."',
-									'".$listing->getDescription()."',
+									'".addslashes($listing->getTitle())."',
+									'".addslashes($listing->getDescription())."',
 									'".$listing->getPostage()."',
 									1",
 									0
