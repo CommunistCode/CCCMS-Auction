@@ -71,6 +71,7 @@
 
 			}
 
+			$db->updateVersion("auction","1.1.0");
 			echo("<strong>Updated to 1.1.0</strong><br />");
 
 		}
