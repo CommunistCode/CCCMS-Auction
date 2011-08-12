@@ -27,6 +27,7 @@
 
 		}
 
+		$data['listingType'] = $_POST['listingType'];
 		$data['listingTitle'] = $_POST['listingTitle'];
 		$data['listingDescription'] = $_POST['listingDescription'];
 		$data['listingQuantity'] = $_POST['listingQuantity'];

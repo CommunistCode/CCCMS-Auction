@@ -70,6 +70,7 @@
 
 			$db->insert("listings",
 									"memberID,
+									 listingType,
 									 listingTitle,
 									 listingDescription,
 								   listingPostage,
@@ -77,6 +78,7 @@
 									 listingStartPrice,
 									 listingDuration",
 									"'".$member->getID()."',
+									'".$listing->getType()."',
 									'".$listing->getTitle()."',
 									'".$listing->getDescription()."',
 									'".$listing->getPostage()."',
@@ -103,6 +105,7 @@
 									"memberID,
 									startDate,
 									endDate,
+									listingType,
 									listingQuantity,
 									listingStartPrice,
 									listingTitle,
@@ -112,6 +115,7 @@
 									"".$member->getID().",
 									".$startTime.",
 									".$endTime.",
+									".$listing->getType().",
 									".$listing->getQuantity().",
 									".$listing->getStartPrice().",
 									'".$listing->getTitle()."',
@@ -151,6 +155,34 @@
 										".$amount.",
 										".$timeNow,
 										0 );
+
+			}
+
+		}
+
+		public function newPurchase($id) {
+	
+			$db = new dbConn();
+
+			$timeNow = time();
+
+			$member = unserialize($_SESSION['member']);
+
+			$runningListing = $this->getRunningListingObject($id);
+
+			$db->insert("purchases",
+									"listingID,
+									memberID,
+									purchaseDate",
+									"".$id.",
+									".$member->getID().",
+									".$timeNow,
+									0 );
+
+			if (($runningListing->getQuantity() -1)  == 0) {
+
+				$runningListing->reduceQuantity(1);
+				$this->stopRunningListing($id);
 
 			}
 
@@ -215,7 +247,12 @@
 
 		public function renderListing($listing) {
 
-			$output  = "<form method='post' action='confirmBid.php'>";
+			if($listing->isAuction()) { 
+				$output  = "<form method='post' action='confirmBid.php'>";
+			}
+			else {
+				$output = "<form method='post' action='confirmPurchase.php'>";
+			}
 			$output .= "<input type='hidden' name='listingID' value='".$listing->getID()."' />";
 			$output .= "<table>";
 			$output .= "<tr>";
@@ -232,28 +269,39 @@
 
 			$highBidInfo = $listing->getHighestBid();
 
-			if ($highBidInfo) {
+			if($listing->isAuction()) {
 
-				$output .= "<input type='text' size='10' name='bidAmount' value='".$highBidInfo['currentPrice']."' />";
-				$output .= "<input type='submit' name='newBid' value='Place Bid' />";
+				if ($highBidInfo) {
+
+					$output .= "<input type='text' size='10' name='bidAmount' value='".$highBidInfo['currentPrice']."' />";
+					$output .= "<input type='submit' name='newBid' value='Place Bid' />";
 		
-				$minBid = $listing->getLowestBidAmount()+$highBidInfo['currentPrice'];
-				$minBidFormatted = sprintf("%01.2f", $minBid);
+					$minBid = $listing->getLowestBidAmount()+$highBidInfo['currentPrice'];
+					$minBidFormatted = sprintf("%01.2f", $minBid);
 
-				$output .= " - Min Bid: ".$minBidFormatted;
-				$output .= "(".$highBidInfo['username'].")";	
+					$output .= " - Min Bid: ".$minBidFormatted;
+					$output .= "(".$highBidInfo['username'].")";	
+
+				}
+
+				else {
+
+					$output .= "<input type='text' size='10' name='bidAmount' value='".$listing->getStartPrice()."' />";
+					$output .= "<input type='submit' name='newBid' value='Place Bid' />";
+
+					$minBid = $listing->getStartPrice() + $listing->getLowestBidAmount();
+					$minBidFormatted = sprintf("%01.2f", $minBid);
+
+					$output .= " - Min Bid: ".$minBidFormatted;
+
+				}
 
 			}
 
 			else {
 
-				$output .= "<input type='text' size='10' name='bidAmount' value='".$listing->getStartPrice()."' />";
-				$output .= "<input type='submit' name='newBid' value='Place Bid' />";
-
-				$minBid = $listing->getStartPrice() + $listing->getLowestBidAmount();
-				$minBidFormatted = sprintf("%01.2f", $minBid);
-
-				$output .= " - Min Bid: ".$minBidFormatted;
+				$output .= $listing->getStartPrice();
+				$output .= "<input type='submit' name='buyItem' value='Buy Now!' />";
 
 			}
 

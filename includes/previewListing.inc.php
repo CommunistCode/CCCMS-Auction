@@ -1,6 +1,9 @@
 <table>
 
 	<tr>
+		<td><?php echo($listing->getType()); ?></td>
+	</tr>
+	<tr>
 		<td><?php echo($listing->getTitle()); ?></td>
 	</tr>
 	<tr>

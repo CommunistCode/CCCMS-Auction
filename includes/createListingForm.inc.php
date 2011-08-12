@@ -2,6 +2,14 @@
 	<br />
 	<table>
 		<tr>
+			<td>Listing Type</td>
+			<td>
+				<select name="listingType" >
+					<option value="0" <?php if ($listing->getType()==0) { echo("SELECTED"); } ?> >Set Price</option>
+					<option value="1" <?php if ($listing->getType()==1) { echo("SELECTED"); } ?> >Auction</option>
+				</select>
+			</td>
+		<tr>
 			<td width='180'>Title</td>
 			<td><input type='text' name='listingTitle' value='<?php echo($listing->getTitle()); ?>' /></td>
 		</tr>

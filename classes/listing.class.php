@@ -5,6 +5,7 @@ require_once ($fullPath.'/classes/dbConn.class.php');
 class listing {
 	
 	var $id;
+	var $type;
 	var $title;
 	var $description;
 	var $quantity;
@@ -15,6 +16,7 @@ class listing {
 	function listing($data) {
 		
 		$this->id = (isset($data['listingID'])) ? $data['listingID'] : "";
+		$this->type = (isset($data['listingType'])) ? $data['listingType'] : "";
 		$this->title = (isset($data['listingTitle'])) ? $data['listingTitle'] : "";  
 		$this->description = (isset($data['listingDescription'])) ? $data['listingDescription'] : "";
 		$this->quantity = (isset($data['listingQuantity'])) ? $data['listingQuantity'] : "";
@@ -29,6 +31,7 @@ class listing {
 		$db = new dbConn();
 
 		$db->update("listings","listingTitle='".$data->getTitle()."'","listingID=".$data->getID(),0);
+		$db->update("listings","listingType='".$data->getType()."'","listingType=".$data->getID(),0);
 		$db->update("listings","listingDescription='".$data->getDescription()."'","listingID=".$data->getID(),0);
 		$db->update("listings","listingQuantity='".$data->getQuantity()."'","listingID=".$data->getID(),0);
 		$db->update("listings","listingStartPrice='".$data->getStartPrice()."'","listingID=".$data->getID(),0);
@@ -41,6 +44,12 @@ class listing {
 		
 		return $this->id;
 	
+	}
+
+	public function getType() {
+
+		return $this->type;
+
 	}
 
 	public function getTitle() {
@@ -76,6 +85,22 @@ class listing {
 	public function getDuration() {
 
 		return $this->duration;
+
+	}
+
+	public function isAuction() {
+
+		if ($this->type == 1) {
+
+			return 1;
+
+		}
+
+		else {
+
+			return 0;
+
+		}
 
 	}
 
@@ -164,6 +189,23 @@ class runningListing extends listing {
 
 			return $array;
 
+		}
+
+	}
+
+	function reduceQuantity($amount) {
+
+		$db = new dbConn();
+
+		$newAmount = $this->quantity - $amount;
+
+		if ($db->update("runningListings","listingQuantity=".$newAmount."","runningListingID=".$this->id."",1)) {
+
+			return true;
+
+		} else {
+			
+			return false;
 		}
 
 	}
