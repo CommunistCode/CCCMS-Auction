@@ -262,15 +262,12 @@
 				$output = "<form method='post' action='confirmPurchase.php'>";
 			}
 			$output .= "<input type='hidden' name='listingID' value='".$listing->getID()."' />";
-			$output .= "<table>";
-			$output .= "<tr>";
-			$output .= "<td>Listing ID: ".$listing->getID()."</td>";
-			$output .= "</tr>";
-			$output .= "<tr>";
+			$output .= "<table id='listing'>";
+			$output .= "<tr class='title'>";
 			$output .= "<td>".$listing->getTitle()."</td>";
 			$output .= "</tr>";
-			$output .= "<tr>";
-			$output .= "<td>".$listing->getDescription()."</td>";
+			$output .= "<tr class='body'>";
+			$output .= "<td>".nl2br($listing->getDescription())."</td>";
 			$output .= "</tr>";
 			$output .= "<tr>";
 			$output .= "<td>";
