@@ -264,7 +264,7 @@
 			$output .= "<input type='hidden' name='listingID' value='".$listing->getID()."' />";
 			$output .= "<table id='listing'>";
 			$output .= "<tr class='title'>";
-			$output .= "<td>".$listing->getTitle()."</td>";
+			$output .= "<td><h1>".$listing->getTitle()."</h1></td>";
 			$output .= "</tr>";
 			$output .= "<tr class='body'>";
 			$output .= "<td>".nl2br($listing->getDescription())."</td>";
