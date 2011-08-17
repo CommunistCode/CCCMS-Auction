@@ -121,6 +121,7 @@ class runningListing extends listing {
 		$this->startDate = (isset($data['startDate']) ? $data['startDate'] : "");
 		$this->endDate = $data['endDate'];
 		$this->listingRunning = $data['listingRunning'];
+		$this->quantity = $data['listingQuantity'];
 
 	}
 

@@ -19,8 +19,8 @@
 
 	}
 
-	$runningListing = $listingTools->getRunningListingObject($_GET['id']);
-	$content = $listingTools->renderListing($runningListing);
+	$listing = $listingTools->getRunningListingObject($_GET['id']);
+	$include = "includes/listing.inc.php"; 
 
 	$heading = "View Listing";
 
