@@ -261,16 +261,16 @@
 			else {
 				$output = "<form method='post' action='confirmPurchase.php'>";
 			}
+
 			$output .= "<input type='hidden' name='listingID' value='".$listing->getID()."' />";
 			$output .= "<table id='listing'>";
-			$output .= "<tr class='title'>";
-			$output .= "<td><h1>".$listing->getTitle()."</h1></td>";
-			$output .= "</tr>";
-			$output .= "<tr class='body'>";
-			$output .= "<td>".nl2br($listing->getDescription())."</td>";
-			$output .= "</tr>";
 			$output .= "<tr>";
 			$output .= "<td>";
+			$output .= "<table>";
+			$output .= "<tr class='auctionTable'>";
+			$output .= "<td class='title'>";
+			$output .= "<h2>".$listing->getTitle()."</h2>";
+			$output .= "</td>";
 
 			$highBidInfo = $listing->getHighestBid();
 
@@ -281,7 +281,7 @@
 					$output .= "<input type='text' size='10' name='bidAmount' value='".$highBidInfo['currentPrice']."' />";
 					$output .= "<input type='submit' name='newBid' value='Place Bid' />";
 		
-					$minBid = $listing->getLowestBidAmount()+$highBidInfo['currentPrice'];
+					$minBid = "Current Bid: ".$listing->getLowestBidAmount()+$highBidInfo['currentPrice'];
 					$minBidFormatted = sprintf("%01.2f", $minBid);
 
 					$output .= " - Min Bid: ".$minBidFormatted;
@@ -305,15 +305,18 @@
 
 			else {
 
-				$output .= $listing->getStartPrice();
-				$output .= "<input type='submit' name='buyItem' value='Buy Now!' />";
+				$output .= "<td class='price'>&pound".$listing->getStartPrice()."</td>";
+				$output .= "<td class='buyButton'><input type='submit' name='buyItem' value='Buy Now!' /></td>";
 
 			}
 
+			$output .= "</tr>";
+			$output .= "<tr><td></td><td colspan='2' class='timeRemaining'>".$listing->getTimeRemaining()."</td></tr>";
+			$output .= "</table>";
 			$output .= "</td>";
 			$output .= "</tr>";
-			$output .= "<tr>";
-			$output .= "<td>".$listing->getTimeRemaining()."</td>";
+			$output .= "<tr class='body'>";
+			$output .= "<td>".nl2br($listing->getDescription())."</td>";
 			$output .= "</tr>";
 			$output .= "</table>";
 			$output .= "</form>";
