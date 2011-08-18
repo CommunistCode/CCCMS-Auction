@@ -147,11 +147,8 @@
 
 			$highestBidInfo = $runningListing->getHighestBid();
 
-			if (($runningListing->getLowestBidAmount()+$highestBidInfo['bidAmount']) > $amount) {
+			if (round(($runningListing->getLowestBidAmount()+$highestBidInfo['currentPrice']),2) <= round($amount,2)) {
 
-			}
-
-			else {
 
 				$db->insert("bids",
 										"listingID,
@@ -163,6 +160,12 @@
 										".$amount.",
 										".$timeNow,
 										0 );
+
+			}
+
+			else {
+
+				echo(($runningListing->getLowestBidAmount()+$highestBidInfo['currentPrice'])."<=".floatval($amount) ."(False)");
 
 			}
 
@@ -249,7 +252,33 @@
 			$min = floor($time/60); 
 			$sec = $time - ($min*60); 
 
-			return $days."d ".$hours."h ".$min."m";
+			$formattedTime = "";
+
+			if ($days != 0) {
+		
+				$formattedTime .= $days . "d ";
+			
+			}
+
+			if ($hours != 0) {
+		
+				$formattedTime .= $hours . "h ";
+			
+			}
+
+			if ($min != 0) {
+
+				$formattedTime .= $min ."m ";
+
+			}
+
+			if ($days == 0 && $hours == 0) {
+
+				$formattedTime .= $seconds ."seconds ";
+
+			}
+
+			return $formattedTime;
 
 		}
 

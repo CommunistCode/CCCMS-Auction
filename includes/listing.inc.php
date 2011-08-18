@@ -11,15 +11,15 @@
 	
 		$highBidInfo = $listing->getHighestBid();
 
-		if ($highBidInfo) {
+		if (isset($highBidInfo['username'])) {
 
 			$minBid = $listing->getLowestBidAmount() + $highBidInfo['currentPrice'];
 			$minBidFormatted = sprintf("%01.2f", $minBid);
 
-			$price  = "Current Bid: &pound".$listing->getLowestBidAmount();
+			$price  = "Current Bid: &pound".sprintf("%01.2f",$highBidInfo['currentPrice']);
 			$price .= " (".$highBidInfo['username'].")";
 
-			$input  = "<input type='text' name='bidAmount' value='".$highBidInfo['currentPrice']."' />";
+			$input  = "<input type='text' name='bidAmount' value='".$minBidFormatted."' />";
 			$input .= "<input type='submit' name='newBid' value='Place Bid' />";
 		
 		}

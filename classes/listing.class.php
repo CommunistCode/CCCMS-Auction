@@ -160,6 +160,7 @@ class runningListing extends listing {
 		$db = new dbConn();
 
 		$query=("SELECT bids.bidAmount,
+										bids.bidID,
 										runningListings.listingStartPrice,
 										members.username 
 						 FROM bids, 
@@ -168,30 +169,56 @@ class runningListing extends listing {
 						 WHERE (bids.listingID=".$this->id." AND 
 						 			 bids.memberID = members.memberID) AND 
 									 runningListings.runningListingID = ".$this->id."
-						 ORDER BY bids.bidAmount DESC ;");
+						 ORDER BY bids.bidAmount DESC,
+						 					bids.bidID ASC 
+						 LIMIT 3;");
 
 		$result = $db->mysqli->query($query);
 
-		$row = $result->fetch_assoc();
+		for ($i=0; $i<3; $i++) {
 
-		if ($result->num_rows < 2 ) {
-		
-			return 0;
+			$row[$i] = $result->fetch_assoc();
 
 		}
+		
 
-		else {
-
-			$array['username'] = $row['username'];
-			
-			$row = $result->fetch_assoc();
-
-			$array['currentPrice'] = $row['bidAmount'];
+		if ($result->num_rows < 1 ) {
+		
+			$array['currentPrice'] = $this->getStartPrice();
 
 			return $array;
 
 		}
 
+		else if ($result->num_rows == 1) {
+
+			$array['username'] = $row[0]['username'];
+			$array['currentPrice'] = $this->getStartPrice();
+
+			return $array;
+
+		}
+
+		else {
+
+			$array['username'] = $row[0]['username'];
+
+			if ((round($row[0]['bidAmount'],2) >= round($row[1]['bidAmount'],2)) && 
+							(round($row[1]['bidAmount'],2) != round($row[2]['bidAmount'],2))) {
+					
+				$array['currentPrice'] = $row[1]['bidAmount'];
+
+			}
+
+			else {
+
+				$array['currentPrice'] = $row[1]['bidAmount'] + $this->getLowestBidAmount();
+
+			}
+
+			return $array;
+
+		} 
 	}
 
 	function reduceQuantity($amount) {
