@@ -21,7 +21,7 @@
 
 	$listingTools->unsetListing();
 
-	$header = "Publish Listing";
+	$heading = "Publish Listing";
 	$content = "Your listing was sucessfully published to the Marketplace!";
 
 	require_once("includes/template.inc.php");
