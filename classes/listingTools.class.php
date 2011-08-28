@@ -437,9 +437,9 @@
 
 			$output  = "<table>";
 			$output .= "<tr>";
-			$output .= "<td width=400>Title</td>";
-			$output .= "<td width=150>Price</td>";
-			$output .= "<td width=200>Time Remaining</td>";
+			$output .= "<th width=400>Title</th>";
+			$output .= "<th width=150>Price</th>";
+			$output .= "<th width=200>Time Remaining</th>";
 			$output .="</tr>";
 
 			$db = new dbConn();

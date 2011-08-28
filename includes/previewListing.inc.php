@@ -1,34 +1,19 @@
 <table>
-
-	<tr>
-		<td><?php echo($listing->getType()); ?></td>
-	</tr>
-	<tr>
-		<td><?php echo($listing->getTitle()); ?></td>
-	</tr>
-	<tr>
-		<td><?php echo($listing->getDescription()); ?></td>
-	</tr>
-	<tr>
-		<td><?php echo($listing->getQuantity()); ?></td>
-	</tr>
-	<tr>
-		<td><?php echo($listing->getStartPrice()); ?></td>
-	</tr>
-	<tr>
-		<td><?php echo($listing->getPostage()); ?></td>
-	</tr>
-	<tr>
-		<td><?php echo($listing->getDuration()); ?></td>
-	</tr>
 	<tr>
 		<td>
-			
+			<font color='red'><strong>This is a PREVIEW of your auction, do you want to:</strong></font>
+		</td>
+		<td>
 			<?php
 				include("includes/previewListSubmits.inc.php");
 			?>
-
 		</td>
 	</tr>
-
 </table>
+
+<?php
+	
+	include("includes/listingTable.inc.php");
+
+?>
+
