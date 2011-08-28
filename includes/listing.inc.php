@@ -21,7 +21,7 @@
 
 			$input  = "<input type='text' name='bidAmount' value='".$minBidFormatted."' />";
 			$input .= "<input type='submit' name='newBid' value='Place Bid' />";
-		
+
 		}
 
 		else {
@@ -42,6 +42,19 @@
 
 		$price = "Price: &pound".$listing->getStartPrice()."";
 		$input = "<input type='submit' name='buyItem' value='Buy Now!' />";
+
+	}
+
+	if (!$listing->getListingRunning()) {
+
+		$timeRemaining = "<strong>Finished</strong>";
+		$input = "<strong>This listing has ended!</strong>";
+
+	}
+
+	else {
+		
+		$timeRemaining=$listing->getTimeRemaining();
 
 	}
 
@@ -67,7 +80,7 @@
 			<td class="details" >Postage: &pound<?php echo($listing->getPostage()); ?></td>
 		</tr>
 		<tr>
-			<td class="details" >Time Remaining: <?php echo($listing->getTimeRemaining()); ?></td>
+			<td class="details" >Time Remaining: <?php echo($timeRemaining); ?></td>
 		</tr>
 		<tr>
 			<td class="details" ><?php echo($input); ?></td>

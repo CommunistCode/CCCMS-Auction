@@ -96,7 +96,9 @@
 									0
 									);			
 
-			return $db->mysqli->insert_id;
+			$newID = $db->mysqli->insert_id;
+
+			return $newID; 
 
 		}
 
@@ -196,6 +198,29 @@
 				$this->stopRunningListing($id);
 
 			}
+
+		}
+
+		public function getPurchases() {
+
+			$member = unserialize($_SESSION['member']);
+
+			$db = new dbConn();
+
+			$result = $db->mysqli->query("SELECT runningListings.listingTitle,
+																					 members.username,
+																					 purchases.listingID
+																		FROM runningListings,
+																				 purchases,  
+																				 members
+																		WHERE (purchases.memberID = '".$member->getID()."' AND
+																					purchases.listingID = runningListings.runningListingID AND
+																					members.memberID = runningListings.memberID)  
+																		ORDER BY purchases.purchaseDate DESC;");
+
+			if (!$result) { echo($db->mysql_error); }
+
+			return $result;	
 
 		}
 

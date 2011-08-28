@@ -6,7 +6,7 @@
 	require_once($fullPath."/membership/includes/checkLogin.inc.php");
 
 	$heading = "Purchases";
-	$content = "Not yet implemented";
+	$include = "includes/purchasesTable.inc.php";
 
 	require_once("includes/template.inc.php");
 	
