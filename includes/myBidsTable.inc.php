@@ -1,10 +1,10 @@
 <table>
 	<tr>
-		<td width=400>Listing</td>
-		<td width=100>Max Bid</td>
-		<td width=100>Current Price</td>
-		<td width=100>Status</td>
-		<td width=100>Time Remaining</td>
+		<th width=375>Listing</th>
+		<th width=100>Max Bid</th>
+		<th width=100>Current Price</th>
+		<th width=100>Status</th>
+		<th width=125>Time Left</th>
 	</tr>
 	
 	<?php
@@ -15,6 +15,7 @@
 		$query = "SELECT r.listingTitle, 
 										 r.runningListingID,
 										 r.listingRunning,
+										 r.listingQuantity,
 										 r.endDate, 
 										 max(b.bidAmount) AS maxBid, 
 										 b.MemberID
@@ -29,7 +30,7 @@
 
 		$result = $db->mysqli->query($query);
 
-		if ($result->num_rows > 0) {
+		if ($result) {
 
 			while($row = $result->fetch_assoc()) {
 
@@ -37,7 +38,7 @@
 
 				$highBid = $runningListing->getHighestBid();
 
-				if ($highBid['currentPrice'] == $row['maxBid']) {
+				if ($highBid['username'] == $member->getUsername()) {
 
 					$status = "WINNING";
 

@@ -3,6 +3,7 @@
 	padding: 10px 10px 20px 20px;
   width: 770px;
   background: white;
+	font-size: 14px;
 }
 
 .auctionLinks {
@@ -28,6 +29,55 @@
 	border: 0px;
 }
 
+.auctionBody th {
+	background: #EDEDED;
+}
+
+#contactSeller td {
+	line-height: 200%;
+	padding: 0px 0px 0px 10px;
+}
+
+#contactSeller .messageHeading {
+	padding: 10px 0px 0px 0px;
+	vertical-align: top;
+	width: 100px;
+}
+
+#contactSeller .messageText {
+	padding: 10px 0px 0px 10px;
+}
+
+#contactSeller .submit {
+	text-align: right;
+	padding: 0px 0px 0px 0px;
+}
+
+#contactSeller .text {
+	line-height: 150%;
+}
+
+#purchaseTable .item {
+	width: 200px;
+}
+
+#purchaseTable .cost {
+	width: 100px;
+}
+
+#purchaseTable .seller {
+	width: 100px;
+	text-align: center;
+}
+
+#purchaseTable .feedback {
+	width: 100px;
+}
+
+#purchaseTable .contact {
+	width: 100px;
+}
+
 #listing {
 	width: 760px;
 }
@@ -48,7 +98,16 @@
 
 #listing .details {
 	padding: 0px 0px 0px 10px;
+	line-height: 26px;
+	vertical-align: middle;
 	font-size: 14px;
+}
+
+#listing .details h1 {
+	font-size: 18px;
+	border: 0px;
+	margin: 0px;
+	padding: 0px;
 }
 
 #listing .body {

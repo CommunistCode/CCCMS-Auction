@@ -238,6 +238,23 @@ class runningListing extends listing {
 
 	}
 
+	function getSeller() {
+
+		$db = new dbConn();
+
+		$query = "SELECT members.username 
+								FROM members,runningListings 
+								WHERE members.memberID = runningListings.memberID AND
+									runningListingID = ".$this->getID();
+
+		$result = $db->mysqli->query($query);
+
+		$data = $result->fetch_assoc();
+
+		return $data['username'];
+
+	}
+
 }
 
 ?>

@@ -14,38 +14,44 @@
 					require_once("../includes/title.inc.php"); 
 				?>
 			</div>
-			<div class='links'>
+			<div id='navBar'>
 				<?php 
 					require_once("../includes/links.inc.php"); 
 				?>
 			</div>
-			<div class="auctionLinks">
-				<?php
-					require_once("includes/auctionLinks.inc.php");
-				?>
-			</div>
-			<div class="auctionBody">
+			<div id='bodyContainer'>
+
+				<div class="auctionLinks">
+					<?php
+						require_once("includes/auctionLinks.inc.php");
+					?>
+				</div>
+			
+				<div class="auctionBody">
 		
-				<?php
+			  <?php
 
 					echo("<h1>".$heading."</h1>");
-	        
+
 					if (isset($content)) {
-						
+
 						echo($content);
 
 					}
 
-					if (isset($include)) {
+          if (isset($include)) {
 
 						include($include);
 
 					}
-        
-				?>
 
+        ?>
+
+				
+				</div>
 
 			</div>
+
 			<div id="footer">
 				<?php 
 					require_once("../includes/footer.inc.php"); 

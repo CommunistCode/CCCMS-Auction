@@ -67,8 +67,8 @@
 	<div id="listing">
 	<table>
 		<tr>
-			<td rowspan="6" class="photo" >Photo</td>
-			<td class="details" ><strong><?php echo($listing->getTitle()); ?></strong></td>
+			<td rowspan="7" class="photo" >Photo</td>
+			<td class="details" ><h1><?php echo($listing->getTitle()); ?></h1></td>
 		</tr>
 		<tr>
 			<td class="details" ><?php echo($price); ?></td>
@@ -84,6 +84,9 @@
 		</tr>
 		<tr>
 			<td class="details" ><?php echo($input); ?></td>
+		</tr>
+		<tr>
+			<td class="details" >Seller: <?php echo($listing->getSeller()); ?> (<a href='contactMember.php?user=<?php echo($listing->getSeller()); ?>'>Contact</a>)</td>
 		</tr>
 	</table>
 

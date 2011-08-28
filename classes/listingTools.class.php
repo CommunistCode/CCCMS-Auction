@@ -6,6 +6,32 @@
 
 	class listingTools {
 
+		public function deliverMessage($user,$message) {
+
+			$db = new dbConn();
+
+			$member = unserialize($_SESSION['member']);
+
+			$result = $db->selectWhere("email","members","username='".$user."'",0);
+			$data = $result->fetch_assoc();
+
+			$to = $user ."<". $data['email'] .">";
+			$subject = "Email from MantisMarket member: ".$member->getUsername();
+			$message = wordwrap($message,70);
+			$headers = 'From: MantisMarket Member <no-reply@mantismarket.co.uk>'."\r\n";
+
+			if(mail($to,$subject,$message,$headers)) {
+
+				return 1;
+
+			} else {
+
+				return 0;
+
+			}
+
+		}
+		
 		public function stopFinishedListings() {
 
 			$db = new dbConn();
@@ -316,12 +342,13 @@
 
 			echo("<table>");
 
-			echo("<td width=400>Title</td>");
-			echo("<td width=70>Quantity</td>");
-			echo("<td width=70>Price</td>");
-			echo("<td></td>");
-			echo("<td></td>");
-			echo("<td></td>");
+			echo("<th width=400>Title</th>");
+			echo("<th width=70>Quantity</th>");
+			echo("<th width=70>Price</th>");
+			echo("<th></th>");
+			echo("<th></th>");
+			echo("<th></th>");
+			echo("<th></th>");
 
 			while ($row=$result->fetch_assoc()) {
 
@@ -348,12 +375,12 @@
 
 			echo("<table>");
 			
-			echo("<tr class='tableHeader'>");
-			echo("<td width=300>Title</td>");
-			echo("<td width=150>Price</td>");
-			echo("<td width=150>Time Remaining</td>");
-			echo("<td width=50></td>");
-			echo("<td width=50></td>");
+			echo("<tr>");
+			echo("<th width=300>Title</th>");
+			echo("<th width=150>Price</th>");
+			echo("<th width=150>Time Remaining</th>");
+			echo("<th width=50></th>");
+			echo("<th width=50></th>");
 			echo("</tr>");
 
 			$db = new dbConn();
