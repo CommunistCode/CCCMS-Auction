@@ -19,7 +19,7 @@
 		<tr>
 			<td class="details" >
 				<?php 
-					if($listing->getType()) { 
+					if(!$listing->getType()) { 
 						echo("<input type='button' value='Buy Now!'/>");
 					} else {
 						echo("<input type='text' /><input type='button' value='Bid' />");
