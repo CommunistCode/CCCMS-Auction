@@ -357,7 +357,7 @@
 				echo("<input type='hidden' name='listingID' value='".$row['listingID']."' />");
 				echo("<td>".$row['listingTitle']."</td>");
 				echo("<td>".$row['listingQuantity']."</td>");
-				echo("<td>".$row['listingStartPrice']."</td>");
+				echo("<td>&pound".$row['listingStartPrice']."</td>");
 				echo("<td><input type='submit' name='edit' value='Edit' /></td>");
 				echo("<td><input type='submit' name='preview' value='Preview' /></td>");
 				echo("<td><input type='submit' name='publish' value='Publish' /></td>");
@@ -461,14 +461,14 @@
 
 				if ($highestBidInfo) {
 
-					$output .= "<td>".$highestBidInfo['currentPrice']."</td>";
+					$output .= "<td>&pound".$highestBidInfo['currentPrice']."</td>";
 
 			
 				}
 
 				else {
 
-					$output .= "<td>".$runningListing->getStartPrice()."</td>";
+					$output .= "<td>&pound".$runningListing->getStartPrice()."</td>";
 
 				}
 

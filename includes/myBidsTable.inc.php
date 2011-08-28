@@ -50,8 +50,8 @@
 
 				echo("<tr>");
 				echo("<td><a href='viewListing.php?id=".$row['runningListingID']."'>".$row['listingTitle']."</a></td>");
-				echo("<td>".$row['maxBid']."</td>");
-				echo("<td>".$highBid['currentPrice']."</td>");
+				echo("<td>&pound".$row['maxBid']."</td>");
+				echo("<td>&pound".$highBid['currentPrice']."</td>");
 				echo("<td>".$status."</td>");
 				echo("<td>".$listingTools->calcTimeRemaining(time(), $row['endDate'])."</td>");
 				echo("</tr>");
