@@ -36,12 +36,12 @@
 
 .auctionBody td {
 	line-height: 150%;
-	padding: 0px 0px 0px 5px;
+	padding: 10px 0px 0px 5px;
 }
 
 #contactSeller td {
 	line-height: 200%;
-	padding: 10px 0px 0px 10px;
+	padding: 0px 0px 0px 10px;
 }
 
 #contactSeller .messageHeading {
