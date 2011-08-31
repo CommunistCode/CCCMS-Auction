@@ -15,18 +15,20 @@
 	
 			unset($_SESSION['editing']);
 
-		}
+		} else {
 
-	}
-
-	else {
-
-		if ($listingTools->saveListing($listing)) {
-
-			$content = "Listing saved!";
+			$content = "Updating listing failed!";
 
 		}
-	
+
+	} else if ($listingTools->saveListing($listing)) {
+
+		$content = "Listing saved!";
+
+	} else {
+
+		$content = "An error occurred, please try again!";
+
 	}
 		
 	$listingTools->unsetListing();

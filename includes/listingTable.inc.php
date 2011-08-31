@@ -1,7 +1,14 @@
+<?php 
+
+	$member = unserialize($_SESSION['member']); 
+	$photoLocation = "photos/tempPhotos/".$member->getID()."-1.jpg";
+
+?>
+
 <div id="listing">
 	<table>
 		<tr>
-			<td rowspan="7" class="photo" >Photo</td>
+			<td rowspan="7" class="photo" ><img width=200 src="<?php echo($photoLocation) ?>" /></td>
 			<td class="details" ><h1><?php echo($listing->getTitle()); ?></h1></td>
 		</tr>
 		<tr>

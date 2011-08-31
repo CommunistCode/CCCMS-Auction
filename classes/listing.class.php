@@ -12,6 +12,7 @@ class listing {
 	var $startPrice;
 	var $postage;
 	var $duration;
+	var $photos;
 
 	function listing($data) {
 		
@@ -23,6 +24,7 @@ class listing {
 		$this->startPrice = (isset($data['listingStartPrice'])) ? $data['listingStartPrice'] : "";
 		$this->postage = (isset($data['listingPostage'])) ? $data['listingPostage'] : "";
 		$this->duration = (isset($data['listingDuration'])) ? $data['listingDuration'] : "";
+		$this->photos = (isset($data['listingPhotos'])) ? $data['listingPhotos'] : "";
 
 	}
 	
@@ -37,6 +39,13 @@ class listing {
 		$db->update("listings","listingStartPrice='".$data->getStartPrice()."'","listingID=".$data->getID(),0);
 		$db->update("listings","listingPostage='".$data->getPostage()."'","listingID=".$data->getID(),0);
 		$db->update("listings","listingDuration='".$data->getDuration()."'","listingID=".$data->getID(),0);
+		$db->update("listings","listingPhotos='".$data->getPhotos()."'","listingID=".$data->getID(),0);
+
+		$listingTools = new listingTools();
+
+		$listingTools->moveTempPhotos($data->getID(),$data->getPhotos());
+
+		return 1;
 
 	}
 	
@@ -85,6 +94,12 @@ class listing {
 	public function getDuration() {
 
 		return $this->duration;
+
+	}
+
+	public function getPhotos() {
+
+		return $this->photos;
 
 	}
 

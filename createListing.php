@@ -15,11 +15,10 @@
 
 		$listingTools = new listingTools();
 		$data = "";
-		$listing = $listingTools->loadListingSession($data);	
+		$listing = $listingTools->loadListingSession($data);
+		unset($_SESSION['editing']);
 
-	}
-
-	else if (isset($_SESSION['editing'])) {
+	} else if (isset($_SESSION['editing'])) {
 
 		$content = "<p>You are in EDITING mode <a href='createListing.php?startNew=1'>click here</a> to start a new listing.</p>";
 

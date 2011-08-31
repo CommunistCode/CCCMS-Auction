@@ -31,6 +31,11 @@
 
 .auctionBody th {
 	background: #EDEDED;
+	line-height: 200%;
+}
+
+.auctionBody td {
+	line-height: 150%;
 }
 
 #contactSeller td {
@@ -120,4 +125,13 @@
 	font-size: 14px;
 }
 
+#createForm th {
+	text-align: right;
+	padding: 5px 10px 5px 0px;
+	width: 150px;
+	vertical-align: top;
+}
 
+#createForm td {
+	padding: 5px 0px 5px 10px;
+}

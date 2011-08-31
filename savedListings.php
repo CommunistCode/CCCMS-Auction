@@ -10,11 +10,13 @@
 	if (isset($_POST['listingID'])) {
 
 		$listingTools->loadExistingListing($_POST['listingID'], TRUE);
+		$listing = unserialize($_SESSION['listing']);
 
 	}
 
 	if (isset($_POST['edit'])) {
 
+    $listingTools->moveTempPhotos($listing->getID(),$listing->getPhotos(),1);
 		$_SESSION['editing'] = 1;
 		header("Location: createListing.php");
 
@@ -22,6 +24,7 @@
 
 	if (isset($_POST['preview'])) {
 
+    $listingTools->moveTempPhotos($listing->getID(),$listing->getPhotos(),1);
 		$_SESSION['editing'] = 1;
 		header("Location: previewListing.php");
 

@@ -35,6 +35,8 @@
 		$data['listingPostage'] = $_POST['listingPostage'];
 		$data['listingDuration'] = $_POST['listingDuration'];
 
+		$data['listingPhotos'] = $listingTools->manageTempPhotos($_FILES['photos']);
+
 		$listingTools->loadListingSession($data);
 		$listing = unserialize($_SESSION['listing']);
 

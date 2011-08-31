@@ -1,11 +1,80 @@
 <?php
-	
+
 	require_once($fullPath."/auction/classes/listing.class.php");
 	require_once($fullPath."/classes/dbConn.class.php");
 	require_once($fullPath."/membership/classes/member.class.php");
 
 	class listingTools {
+	
+		public function copyPhotosRunning($savedListingID, $runningListingID, $numPhotos) {
 
+			if (!$numPhotos) {
+
+				return;
+
+			}
+
+			$runningLocation = "photos/runningListings/".$runningListingID;
+			$savedLocation = "photos/savedListing/".$savedListingID;
+
+			mkdir($runningLocation);
+			
+			for ($i=1; $i<=$numPhotos; $i++) {
+
+				copy($savedLocation."/".$i.".jpg",$runningLocation."/".$i.".jpg");
+
+			}
+
+		}
+
+		public function moveTempPhotos($listingID, $numPhotos, $restoreForEditing=0) {
+
+			$member = unserialize($_SESSION['member']);
+
+			for ($i=1; $i<=$numPhotos; $i++) {
+
+				$photoDir = "photos/savedListing/".$listingID;
+
+				if ($i==1 && !file_exists($photoDir)) {
+
+					mkdir($photoDir);
+
+				}
+
+				$savedLocation = "photos/savedListing/".$listingID."/".$i.".jpg";
+				$tempLocation = "photos/tempPhotos/".$member->getID()."-".$i.".jpg";
+
+				if (!$restoreForEditing) {
+					
+					copy($tempLocation,$savedLocation);
+
+				} else {
+
+					copy($savedLocation,$tempLocation);
+
+				}
+
+			}
+
+		}
+		
+		public function manageTempPhotos($photos) {
+
+			$member = unserialize($_SESSION['member']);
+			$numPhotos = count($photos['name']);
+
+			for ($i=1; $i<=$numPhotos; $i++) {
+
+				$tmpLocation = "photos/tempPhotos/".$member->getID()."-".$i.".jpg";
+
+				move_uploaded_file($photos['tmp_name'][$i-1],$tmpLocation);
+
+			}
+
+			return $numPhotos;
+
+		}
+		
 		public function deliverMessage($user,$message) {
 
 			$db = new dbConn();
@@ -110,7 +179,8 @@
 								   listingPostage,
 									 listingQuantity,
 									 listingStartPrice,
-									 listingDuration",
+									 listingDuration,
+									 listingPhotos",
 									"'".$member->getID()."',
 									'".$listing->getType()."',
 									'".addslashes($listing->getTitle())."',
@@ -118,11 +188,14 @@
 									'".$listing->getPostage()."',
 									'".$listing->getQuantity()."',
 									'".$listing->getStartPrice()."',
-									'".$listing->getDuration()."'",
+									'".$listing->getDuration()."',
+									'".$listing->getPhotos()."'",
 									0
 									);			
 
 			$newID = $db->mysqli->insert_id;
+
+			$this->moveTempPhotos($newID, $listing->getPhotos());	
 
 			return $newID; 
 
@@ -147,7 +220,8 @@
 									listingTitle,
 									listingDescription,
 									listingPostage,
-									listingRunning",
+									listingRunning,
+									listingPhotos",
 									"".$member->getID().",
 									".$startTime.",
 									".$endTime.",
@@ -157,9 +231,13 @@
 									'".addslashes($listing->getTitle())."',
 									'".addslashes($listing->getDescription())."',
 									'".$listing->getPostage()."',
-									1",
+									1,
+									'".$listing->getPhotos()."'",
 									0
 								);
+
+			$newID = $db->mysqli->insert_id;
+			$this->copyPhotosRunning($listing->getID(),$newID,$listing->getPhotos());
 
 		}
 

@@ -9,7 +9,7 @@
 
 			$db = new dbConn();	
 
-			if ($this->update_1_1_0($db)) {
+			if ($this->update_1_2_0($db)) {
 
 				echo("All updates were sucessful!<br />");
 
@@ -73,6 +73,38 @@
 
 			$db->updateVersion("auction","1.1.0");
 			echo("<strong>Updated to 1.1.0</strong><br />");
+
+		}
+
+		public function update_1_2_0($db) {
+
+			$this->update_1_1_0($db);
+
+			$query = "ALTER TABLE listings ADD listingPhotos INT";
+
+			if ($db->mysqli->query($query)) {
+
+				echo("listingPhotos added to listing table<br />");
+
+			} else { $error = 1;}
+
+			$query = "ALTER TABLE runningListings ADD listingPhotos INT";
+
+			if ($db->mysqli->query($query)) {
+
+				echo("listingPhotos added to runningListing table<br />");
+
+			} else {$error = 1;}
+
+			if ($db->updateVersion("auction","1.2.0") && !$error) {
+	
+				echo("<strong>Updated to 1.2.0</strong><br />");
+
+			} else {
+
+				echo("<strong>Update to 1.2.0 failed in some areas</strong><br />");
+
+			}
 
 		}
 

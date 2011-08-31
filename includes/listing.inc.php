@@ -58,6 +58,12 @@
 
 	}
 
+	if ($listing->getPhotos()) {
+
+		$photoLocation = "photos/runningListings/".$listing->getID()."/1.jpg";
+
+	}
+
 ?>
 
 <form method="post" action="<?php echo($actionPage); ?>">
@@ -67,7 +73,7 @@
 	<div id="listing">
 	<table>
 		<tr>
-			<td rowspan="7" class="photo" >Photo</td>
+			<td rowspan="7" class="photo" ><?php if (isset($photoLocation)) { echo("<img src='".$photoLocation."' width=200 />"); } else { echo("Photo"); } ?></td>
 			<td class="details" ><h1><?php echo($listing->getTitle()); ?></h1></td>
 		</tr>
 		<tr>
