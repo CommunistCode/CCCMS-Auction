@@ -94,12 +94,16 @@
 }
 
 #listing .photo {
-	width:200px;
-	height: 200px;
-	border: black solid 1px;
 	margin: 0px 0px 0px 0px;
-	text-align: center;
-	border-radius: 4px;
+	padding: 5px 10px 0px 0px;
+	text-align: left;
+	border-right: solid 1px grey;
+}
+
+#listing .photo img {
+padding: 0px;
+margin: 0px;
+				border-radius: 4px;
 }
 
 #listing .details {
