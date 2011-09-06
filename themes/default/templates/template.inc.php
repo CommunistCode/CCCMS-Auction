@@ -4,19 +4,19 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 		<title><?php echo($title." : ".$pageContent['title']); ?></title>
-		<link href="../stylesheet/stylesheet.css" rel="stylesheet" type="text/css" />
-		<link href="stylesheet/auctionStyle.css" rel="stylesheet" type="text/css" />
+		<link href="../themes/default/stylesheets/base.css" rel="stylesheet" type="text/css" />
+		<link href="themes/default/stylesheets/auctionStyle.css" rel="stylesheet" type="text/css" />
 	</head>
 	<body>
 		<div id="mainContainer">
 			<div id="title">
 				<?php 
-					require_once("../includes/title.inc.php"); 
+					require_once($fullPath."/themes/".$pageTools->getTheme("base")."/templates/title.inc.php"); 
 				?>
 			</div>
 			<div id='navBar'>
 				<?php 
-					require_once("../includes/links.inc.php"); 
+					require_once($fullPath."/themes/".$pageTools->getTheme("base")."/templates/links.inc.php"); 
 				?>
 			</div>
 			<div id='bodyContainer'>
@@ -54,7 +54,7 @@
 
 			<div id="footer">
 				<?php 
-					require_once("../includes/footer.inc.php"); 
+					require_once($fullPath."/themes/".$pageTools->getTheme("base")."/templates/footer.inc.php"); 
 				?>
 			</div>
 		</div>

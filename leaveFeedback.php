@@ -6,6 +6,6 @@
 	$heading = "Leave Feedback";
 	$content = "Feature is not yet implemented!";
 
-	require_once("includes/template.inc.php");
+	require_once("themes/".$pageTools->getTheme("auction")."/templates/template.inc.php");
 
 ?>

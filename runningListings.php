@@ -22,6 +22,6 @@
 	$heading = "Running Listings";
 	$include = "includes/runningListings.inc.php";
 
-	require_once("includes/template.inc.php");
+	require_once("themes/".$pageTools->getTheme("auction")."/templates/template.inc.php");
 
 ?>
