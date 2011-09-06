@@ -4,8 +4,8 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 		<title><?php echo($title." : ".$pageContent['title']); ?></title>
-		<link href="../themes/default/stylesheets/base.css" rel="stylesheet" type="text/css" />
-		<link href="themes/default/stylesheets/auctionStyle.css" rel="stylesheet" type="text/css" />
+		<link href="../themes/<?php echo($pageTools->getTheme("base")); ?>/stylesheets/base.css" rel="stylesheet" type="text/css" />
+		<link href="themes/<?php echo($pageTools->getTheme("auction")); ?>/stylesheets/auctionStyle.css" rel="stylesheet" type="text/css" />
 	</head>
 	<body>
 		<div id="mainContainer">
