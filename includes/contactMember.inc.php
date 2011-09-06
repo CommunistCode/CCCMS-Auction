@@ -1,6 +1,20 @@
 <form method='post' action='contactMember.php'>
 
-	<input type='hidden' name='user' value='<?php echo($_POST['user']); ?>' />
+<?php
+
+	if(isset($_POST['user'])) {
+	
+		$user = $_POST['user'];
+
+	} else if (isset($_GET['user'])) {
+
+		$user = $_GET['user'];
+
+	}
+
+?>
+
+	<input type='hidden' name='user' value='<?php echo($user); ?>' />
 
 	<table id='contactSeller'>
 		<tr>
@@ -8,15 +22,7 @@
 			<td>
 				<?php 
 
-					if(isset($_POST['user'])) {
-				
-						$user = $_POST['user'];
-
-					} else if (isset($_GET['user'])) {
-
-						$user = $_GET['user'];
-
-					}	
+						
 
 					if ($user) {
 
