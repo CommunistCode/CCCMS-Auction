@@ -35,6 +35,6 @@
 	$heading = "Create Listing";
 	$include = "includes/createListingForm.inc.php";
 
-	require_once("includes/template.inc.php");
+	require_once("themes/".$pageTools->getTheme("auction")."/templates/template.inc.php");
 
 ?>
