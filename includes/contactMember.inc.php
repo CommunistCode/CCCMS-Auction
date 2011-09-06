@@ -1,4 +1,4 @@
-<form method='post' action='contactSeller.php'>
+<form method='post' action='contactMember.php'>
 
 	<input type='hidden' name='user' value='<?php echo($_POST['user']); ?>' />
 
