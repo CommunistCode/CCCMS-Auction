@@ -5,7 +5,7 @@
 	require_once($fullPath."/membership/classes/member.class.php");
 
 	class listingTools {
-	
+		
 		public function copyPhotosRunning($savedListingID, $runningListingID, $numPhotos) {
 
 			if (!$numPhotos) {
@@ -300,6 +300,10 @@
 
 				$runningListing->reduceQuantity(1);
 				$this->stopRunningListing($id);
+
+			} else {
+
+				$runningListing->reduceQuantity(1);
 
 			}
 
