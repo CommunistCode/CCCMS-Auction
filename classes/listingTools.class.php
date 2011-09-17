@@ -348,6 +348,14 @@
 
 		}
 
+		public function deleteRunningListing($id) {
+
+			$db = new dbConn();
+
+			$db->delete("runningListings","runningListingID=".$id);
+
+		}
+
 		public function unsetListing() {
 
 			unset($_SESSION['listing']);
@@ -505,7 +513,7 @@
 				else {
 					echo("<td><input type='submit' name='startRunning' value='Start' /></td>");
 				}
-				echo("<td><input type='submit' name='deleteRunning' value='Delete' /></td>");
+				echo("<td><input type='submit' name='deleteRunning' value='Remove' /></td>");
 				echo("</tr>");
 				echo("</form>");
 

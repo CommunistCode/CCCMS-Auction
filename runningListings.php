@@ -19,6 +19,12 @@
 
 	}
 
+	if (isset($_POST['deleteRunning'])) {
+
+		$listingTools->deleteRunningListing($_POST['listingID']);
+
+	}
+
 	$heading = "Running Listings";
 	$include = "includes/runningListings.inc.php";
 

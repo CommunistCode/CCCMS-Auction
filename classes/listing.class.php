@@ -242,7 +242,7 @@ class runningListing extends listing {
 
 		$newAmount = $this->quantity - $amount;
 
-		if ($db->update("runningListings","listingQuantity=".$newAmount."","runningListingID=".$this->id."",1)) {
+		if ($db->update("runningListings","listingQuantity=".$newAmount."","runningListingID=".$this->id."",0)) {
 
 			return true;
 
