@@ -4,13 +4,18 @@
 	<br />
 	<table id='createForm'>
 		<tr>
-			<th>Listing Type</td>
+			<th>Listing Type</th>
 			<td>
 				<select name="listingType" >
 					<option value="0" <?php if ($listing->getType()==0) { echo("SELECTED"); } ?> >Set Price</option>
 					<option value="1" <?php if ($listing->getType()==1) { echo("SELECTED"); } ?> >Auction</option>
 				</select>
 			</td>
+		</tr>
+		<tr>
+			<th>Category</th>
+			<td><p>Coming Soon!</p></td>
+		</tr>
 		<tr>
 			<th width='180'>Title</td>
 			<td><input type='text' size='83' name='listingTitle' value='<?php echo($listing->getTitle()); ?>' /></td>
@@ -40,11 +45,11 @@
 		</tr>
 		<tr>
 			<th>Starting Price (ea)</td>
-			<td>&pound <input type='text' name='listingStartPrice' size='6' value='<?php echo($listing->getStartPrice()); ?>' /></td>
+			<td>&pound; <input type='text' name='listingStartPrice' size='6' value='<?php echo($listing->getStartPrice()); ?>' /></td>
 		</tr>
 		<tr>
 			<th>Postage (ea)</td>
-			<td>&pound <input type='text' name='listingPostage' size='6' value='<?php echo($listing->getPostage()); ?>' /></td>
+			<td>&pound; <input type='text' name='listingPostage' size='6' value='<?php echo($listing->getPostage()); ?>' /></td>
 		</tr>			
 		<tr>
 			<th>Duration</td>
