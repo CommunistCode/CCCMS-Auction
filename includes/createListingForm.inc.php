@@ -17,11 +17,11 @@
 			<td><p>Coming Soon!</p></td>
 		</tr>
 		<tr>
-			<th width='180'>Title</td>
+			<th width='180'>Title</th>
 			<td><input type='text' size='83' name='listingTitle' value='<?php echo($listing->getTitle()); ?>' /></td>
 		</tr>
 		<tr>
-			<th>Description</td>
+			<th>Description</th>
 			<td><textarea rows='10' cols='60' name='listingDescription'><?php echo($listing->getDescription()); ?></textarea></td>
 		</tr>
 		<?php 
@@ -36,23 +36,23 @@
 
 		?>
 		<tr>
-			<th>Photo</td>
+			<th>Photo</th>
 			<td><input type='file' name='photos[]' /></td>
 		</tr>
 		<tr>
-			<th>Quantity</td>
+			<th>Quantity</th>
 			<td><input type='text' name='listingQuantity' size='4' value='<?php echo($listing->getQuantity()); ?>' /></td>
 		</tr>
 		<tr>
-			<th>Starting Price (ea)</td>
+			<th>Starting Price (ea)</th>
 			<td>&pound; <input type='text' name='listingStartPrice' size='6' value='<?php echo($listing->getStartPrice()); ?>' /></td>
 		</tr>
 		<tr>
-			<th>Postage (ea)</td>
+			<th>Postage (ea)</th>
 			<td>&pound; <input type='text' name='listingPostage' size='6' value='<?php echo($listing->getPostage()); ?>' /></td>
 		</tr>			
 		<tr>
-			<th>Duration</td>
+			<th>Duration</th>
 			<td>
 				<select name='listingDuration' />
 					<?php
