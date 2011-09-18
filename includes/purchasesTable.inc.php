@@ -19,7 +19,15 @@
 
 		echo("<tr>");
 		echo("<td class='item'><a href='viewListing.php?id=".$row['listingID']."'>".$row['listingTitle']."</a></td>");
-		echo("<td class='cost'></td>");
+		
+		echo("<td class='cost'>");
+			
+			$totalCost = $row['listingPostage'] + $row['currentPrice'];
+			$totalCostFormatted = sprintf("%01.2f",$totalCost);
+			echo("&pound; ".$totalCostFormatted);
+
+		echo("</td>");
+		
 		echo("<td class='seller'>".$row['username']."</td>");
 		echo("<td class='contact'>
 						<form method='post' action='contactMember.php'>

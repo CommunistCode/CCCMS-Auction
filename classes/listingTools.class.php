@@ -237,6 +237,13 @@
 								);
 
 			$newID = $db->mysqli->insert_id;
+
+			if ($listing->getType() == 0) {
+				
+				$db->update("runningListings","currentPrice='".$listing->getStartPrice()."'","runningListingID=".$newID);
+
+			}
+
 			$this->copyPhotosRunning($listing->getID(),$newID,$listing->getPhotos());
 
 		}
@@ -316,6 +323,8 @@
 			$db = new dbConn();
 
 			$result = $db->mysqli->query("SELECT runningListings.listingTitle,
+																					 runningListings.listingPostage,
+																					 runningListings.currentPrice,
 																					 members.username,
 																					 purchases.listingID
 																		FROM runningListings,

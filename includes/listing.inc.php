@@ -16,7 +16,7 @@
 			$minBid = $listing->getLowestBidAmount() + $highBidInfo['currentPrice'];
 			$minBidFormatted = sprintf("%01.2f", $minBid);
 
-			$price  = "Current Bid: &pound".sprintf("%01.2f",$highBidInfo['currentPrice']);
+			$price  = "Current Bid: &pound;".sprintf("%01.2f",$highBidInfo['currentPrice']);
 			$price .= " (".$highBidInfo['username'].")";
 
 			$input  = "<input type='text' name='bidAmount' value='".$minBidFormatted."' />";
