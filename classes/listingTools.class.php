@@ -468,6 +468,12 @@
 
 			echo("</table>");
 
+			if (!$result->num_rows) {
+
+				echo("<br /><p><center>You do not have any saved listings!</center></p>");
+
+			}
+
 		}
 
 		public function renderMemberRunningListings() {

@@ -30,7 +30,7 @@
 
 		$result = $db->mysqli->query($query);
 
-		if ($result) {
+		if ($result->num_rows) {
 
 			while($row = $result->fetch_assoc()) {
 
