@@ -2,10 +2,22 @@
 
 	$finishedListings = $listingTools->getFinishedListings(10);
 
-	while ($finishedListing = $finishedListings->fetch_assoc())	{
+	echo("<table>");
 
-		echo($finishedListing['listingTitle']."<br/>");
+		echo("<th width='400'>Listing Title</th>");
+		echo("<th width='100'>End Date</th>");
+		echo("<th width='100'>Buyer</th>");
+
+	foreach ($finishedListings as $finishedListing) {
+
+		echo("<tr>");	
+		echo("<td>".$finishedListing['title']."</td>");
+		echo("<td>".date("d-M-y",$finishedListing['date'])."</td>");
+		echo("<td>".$finishedListing['buyer']."</td>");
+		echo("</tr>");
 
 	}
+
+	echo("</table>");
 
 ?>

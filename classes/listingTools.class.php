@@ -12,9 +12,59 @@
 
 			$db = new dbConn();
 
-			$result = $db->selectWhere("listingTitle","runningListings","memberID='".$member->getID()."' AND endDate < ".time()." LIMIT ".$limit);
+			$listingArray = array();
 
-			return $result;
+			$purchases = $this->getPurchases($limit);
+
+			$arrayLength = 0;
+
+			while ($row=$purchases->fetch_assoc()) {
+
+				$listingArray[$arrayLength]['id'] = $row['listingID'];
+				$listingArray[$arrayLength]['date'] = $row['purchaseDate'];
+				$listingArray[$arrayLength]['title'] = $row['listingTitle'];
+				$listingArray[$arrayLength]['buyer'] = $row['username'];
+
+				$arrayLength++;
+
+			}
+
+			$result = $db->selectWhere("runningListingID,listingTitle,endDate","runningListings","memberID='".$member->getID()."' AND endDate < ".time()." LIMIT ".$limit);
+
+			while ($row = $result->fetch_assoc()) {
+
+				$runningListing = $this->getRunningListingObject($row['runningListingID']);
+				$highBidInfo = $runningListing->getHighestBid();
+
+				if (!isset($highBidInfo['username'])) {
+
+					$buyer = "Didn't Sell";
+				
+				}
+
+				$listingArray[$arrayLength]['id'] = $row['runningListingID'];
+				$listingArray[$arrayLength]['date'] = $row['endDate'];
+				$listingArray[$arrayLength]['buyer'] = $buyer; 
+				$listingArray[$arrayLength]['title'] = $row['listingTitle'];
+
+			}
+
+			// Sort listingArray by date
+			
+			foreach($listingArray as $key => $value) {
+				
+				$temp[$key] = $value['date'];
+			}
+			  
+			sort($temp);
+			
+			foreach($temp as $key => $value) {
+			
+				$sortedListingArray[] = $listingArray[$key];
+			}
+
+
+			return array_slice($sortedListingArray,0,$limit);
 
 		}
 		
@@ -328,7 +378,7 @@
 
 		}
 
-		public function getPurchases() {
+		public function getPurchases($limit) {
 
 			$member = unserialize($_SESSION['member']);
 
@@ -338,16 +388,20 @@
 																					 runningListings.listingPostage,
 																					 runningListings.currentPrice,
 																					 members.username,
-																					 purchases.listingID
+																					 purchases.listingID,
+																					 purchases.purchaseDate
 																		FROM runningListings,
 																				 purchases,  
 																				 members
 																		WHERE (purchases.memberID = '".$member->getID()."' AND
 																					purchases.listingID = runningListings.runningListingID AND
 																					members.memberID = runningListings.memberID)  
-																		ORDER BY purchases.purchaseDate DESC;");
+																		ORDER BY purchases.purchaseDate 
+																		DESC 
+																		LIMIT ".$limit."; 
+																		");
 
-			if (!$result) { echo($db->mysql_error); }
+			if (!$result) { echo($db->mysqli->error); }
 
 			return $result;	
 

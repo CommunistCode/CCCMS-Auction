@@ -11,14 +11,18 @@
 			$db = new dbConn();
 			$vt = new versionTools();
 
-			if (!$vt->isVersionGreater("auction","1.2.0")) {
+			if (!$vt->isVersionGreater("auction","1.3.0")) {
 
-				echo("Already up-to-date at version 1.2.0");
+				echo("Already up-to-date at version 1.3.0");
 				return;
+
+			} else {
+
+				echo("Current version is ".$vt->getVersion("auction")." - updating! <br />");
 
 			}
 
-			if ($this->update_1_2_0($db,$vt)) {
+			if ($this->update_1_3_0($db,$vt) == 1) {
 
 				echo("All updates were sucessful!<br />");
 
@@ -34,7 +38,7 @@
 
 			if (!$vt->isVersionGreater("auction","1.1.0")) {
 
-				return;
+				return 1;
 
 			}
 			
@@ -74,19 +78,19 @@
 				if ($db->updateVersion("auction","1.1.0")) {
 
 					echo("<strong>Updated to 1.1.0</strong><br />");
-					return -1;
+					return 1;
 
 				} else {
 
 					echo("<strong>Update to version 1.1.0 complete but could not update version database!");
-					return -1;
+					return 1;
 
 				}
 
 			} else {
 
 				echo("<strong>Update to 1.1.0 failed in some areas</strong>");
-				return 1;
+				return -1;
 
 			}
 
@@ -95,12 +99,12 @@
 		public function update_1_2_0($db, $vt) {
 
 			if (!$vt->isVersionGreater("auction","1.2.0")) {
-
-				return;
+				
+				return 1;
 
 			} else {
 			
-				if (!$this->update_1_1_0($db, $vt)) {
+				if ($this->update_1_1_0($db, $vt) == -1) {
 
 					return -1;
 
@@ -139,6 +143,48 @@
 			} else {
 
 				echo("<strong>Update to 1.2.0 failed in some areas</strong><br />");
+
+			}
+
+		}
+
+		public function update_1_3_0($db, $vt) {
+
+			if (!$vt->isVersionGreater("auction","1.3.0")) {
+
+				return 1;
+
+			} else {
+
+				if ($this->update_1_2_0($db, $vt) == -1) {
+					
+					return -1;
+
+				}
+
+			}
+
+			$query = "INSERT INTO memberLinks(linkName,destination,category) VALUES('Finished Listings','../auction/finishedListings.php','Listing Tools')";
+
+			if ($db->mysqli->query($query)) {
+
+				echo("Finished Listings link added to memberLinks");
+
+			} else { $error =1; }
+
+			if (isset($error)) {
+
+				if ($db->updateVersion("auction","1.3.0")) {
+
+					echo("<strong>Updated to 1.3.0</strong><br />");
+					return 1;
+
+				} else {
+
+					echo("<strong>Update to version 1.3.0 complete but could not update version database!<br />");
+					return 1;
+
+				}
 
 			}
 
