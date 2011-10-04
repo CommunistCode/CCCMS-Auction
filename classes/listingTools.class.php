@@ -6,6 +6,18 @@
 
 	class listingTools {
 		
+		public function getFinishedListings($limit) {
+
+			$member = unserialize($_SESSION['member']);
+
+			$db = new dbConn();
+
+			$result = $db->selectWhere("listingTitle","runningListings","memberID='".$member->getID()."' AND endDate < ".time()." LIMIT ".$limit);
+
+			return $result;
+
+		}
+		
 		public function copyPhotosRunning($savedListingID, $runningListingID, $numPhotos) {
 
 			if (!$numPhotos) {
