@@ -33,6 +33,12 @@
 
 					echo("<h1>".$heading."</h1>");
 
+					if (isset($help)) {
+						
+						echo("<div class='help'>".$help."</div>");
+
+					}
+
 					if (isset($content)) {
 
 						echo($content);

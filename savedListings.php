@@ -44,7 +44,7 @@
 	}
 
 	$heading = "Saved Listings";
-	$content = "<strong>Did you know?:</strong> you can create listings when you have free time and select save, so when your oothes hatch you can publish your listings quickly! Saved listings also allow you to quickly publish repeat listings as and when needed!<br /><br />";
+	$help = "You can create auctions when you have free time and save them ready to list when required. It also facillitates re-listing auctions on the fly!";
 	$include = "includes/savedListings.inc.php";
 
 	require_once("themes/".$pageTools->getTheme("auction")."/templates/template.inc.php");
