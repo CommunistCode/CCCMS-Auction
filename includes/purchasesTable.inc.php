@@ -1,6 +1,6 @@
 <?php
 
-	$purchases = $listingTools->getPurchases();
+	$purchases = $listingTools->getPurchases(10);
 
 ?>
 
