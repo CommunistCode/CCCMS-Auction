@@ -9,9 +9,11 @@
 		echo("<th width='100'>End Date</th>");
 		echo("<th width='100'>Buyer</th>");
 
-	if (!count($finishedListings)) {
+	if (!$finishedListings) {
 
+		echo("<tr>");
 		echo("<td colspan='3' align='center'>You do not have any finished listings!</td>");
+		echo("</tr>");
 
 	} else {
 

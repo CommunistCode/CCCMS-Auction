@@ -50,19 +50,26 @@
 			}
 
 			// Sort listingArray by date
-			
-			foreach($listingArray as $key => $value) {
-				
-				$temp[$key] = $value['date'];
-			}
-			  
-			sort($temp);
-			
-			foreach($temp as $key => $value) {
-			
-				$sortedListingArray[] = $listingArray[$key];
-			}
 
+			if (count($listingArray) != 0) {
+
+				foreach($listingArray as $key => $value) {
+				
+					$temp[$key] = $value['date'];
+				}
+			  
+				sort($temp);
+			
+				foreach($temp as $key => $value) {
+			
+					$sortedListingArray[] = $listingArray[$key];
+				}
+
+			} else {
+
+				return 0;
+
+			}
 
 			return array_slice($sortedListingArray,0,$limit);
 

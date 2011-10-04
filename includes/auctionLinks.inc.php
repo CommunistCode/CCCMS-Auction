@@ -1,5 +1,5 @@
 <ul>
-	<li><a href='index.php'>Marketplace Home</a></li>	
+	<li><a href='index.php'>Marketplace</a></li>	
 	<li><a href='viewListings.php'>View Listings</a></li>
 
 

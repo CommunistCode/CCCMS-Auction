@@ -168,7 +168,7 @@
 
 			if ($db->mysqli->query($query)) {
 
-				echo("Finished Listings link added to memberLinks");
+				echo("Finished Listings link added to memberLinks<br />");
 
 			} else { $error =1; }
 
