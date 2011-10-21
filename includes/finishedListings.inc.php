@@ -21,7 +21,7 @@
 
 			echo("<tr>");	
 			echo("<td><a href='viewListing.php?id=".$finishedListing['id']."'>".$finishedListing['title']."</a></td>");
-			echo("<td>".date("d-M-y",$finishedListing['date'])."</td>");
+			echo("<td>".date("d-M-y H:i",$finishedListing['date'])."</td>");
 			echo("<td>".$finishedListing['buyer']."</td>");
 			echo("</tr>");
 
