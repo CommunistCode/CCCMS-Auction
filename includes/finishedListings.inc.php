@@ -6,7 +6,7 @@
 	echo("<table>");
 
 		echo("<th width='400'>Listing Title</th>");
-		echo("<th width='100'>End Date</th>");
+		echo("<th width='200'>End Date</th>");
 		echo("<th width='100'>Buyer</th>");
 
 	if (!$finishedListings) {
