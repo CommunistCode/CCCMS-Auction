@@ -626,7 +626,7 @@
 		
 			if (!$result->num_rows) {
 
-				$output = "<tr><td colspan='3'><center><strong>There are currently no listings :( - Please check back later!</strong></center></td>";
+				$output .= "<tr><td colspan='3'><center><strong>There are currently no listings :( - Please check back later!</strong></center></td>";
 
 			}
 			
