@@ -624,9 +624,9 @@
 
 			$result = $this->getRunningListings($orderBy, $inOrder, $limit);
 		
-			if (!$result->num_rows) {
+			if ($result->num_rows == 0) {
 
-				$output .= "<tr><td colspan='3'><center><strong>There are currently no listings :( - Please check back later!</strong></center></td>";
+				$output .= "<tr><td colspan='3'><center><strong>There are currently no listings :( - Please check back later!</strong></center></td></tr>";
 
 			}
 			
@@ -663,18 +663,26 @@
 
 		}
 
-		public function getRunningListings($orderBy, $inOrder, $limit, $memberID = "*") {
+		public function getRunningListings($orderBy, $inOrder, $limit, $memberID = NULL) {
 
 			$db = new dbConn();
 
 			$this->stopFinishedListings();
 
-			$result = $db->mysqli->query("SELECT *  
-																		FROM runningListings 
-																		WHERE listingRunning=1 AND
-																		memberID = '".$memberID."' 
-																		ORDER BY ".$orderBy." ".$inOrder." 
-																		LIMIT ".$limit); 
+			$query = "SELECT *
+									FROM runningListings 
+									WHERE listingRunning=1 ";
+
+			if ($memberID != NULL) {
+				
+				$query .= "AND memberID = '".$memberID."'";
+
+			}
+
+			$query .= "ORDER BY ".$orderBy." ".$inOrder." 
+								 LIMIT ".$limit;
+
+			$result = $db->mysqli->query($query); 
 
 			return $result;
 
