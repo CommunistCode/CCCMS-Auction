@@ -565,11 +565,8 @@
 
 			$member = unserialize($_SESSION['member']);
 
-			$result = $db->mysqli->query("SELECT * 
-																		FROM runningListings 
-																		WHERE memberID=".$member->getID()."
-																		ORDER BY endDate DESC"); 
-		
+			$result = $this->getRunningListings("endDate","DESC",10,$member->getID());
+
 			while ($row = $result->fetch_assoc()) {
 
 				$runningListing = new runningListing($row);
@@ -620,13 +617,7 @@
 			$output .= "<th width=200>Time Remaining</th>";
 			$output .="</tr>";
 
-			$db = new dbConn();
-
-			$result = $db->mysqli->query("SELECT *  
-																		FROM runningListings 
-																		WHERE listingRunning=1 
-																		ORDER BY ".$orderBy." ".$inOrder." 
-																		LIMIT ".$limit); 
+			$result = getRunningListings($orderBy, $inOrder, $limit);
 
 			while ($row = $result->fetch_assoc()) {
 
@@ -658,6 +649,23 @@
 			$output .= "</table>";
 
 			return $output;
+
+		}
+
+		public function getRunningListings($orderBy, $inOrder, $limit, $memberID = "*") {
+
+			$db = new dbConn();
+
+			$this->stopFinishedListings();
+
+			$result = $db->mysqli->query("SELECT *  
+																		FROM runningListings 
+																		WHERE listingRunning=1 AND
+																		memberID = '".$memberID."' 
+																		ORDER BY ".$orderBy." ".$inOrder." 
+																		LIMIT ".$limit); 
+
+			return $result;
 
 		}
 
