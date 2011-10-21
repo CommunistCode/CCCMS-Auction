@@ -567,6 +567,11 @@
 
 			$result = $this->getRunningListings("endDate","DESC",10,$member->getID());
 
+			if ($result->num_rows == 0) {
+
+				echo("<td colspan='5'><center><strong>You currently have no runnning listings!</strong><center></td>");
+			}
+
 			while ($row = $result->fetch_assoc()) {
 
 				$runningListing = new runningListing($row);
@@ -617,8 +622,14 @@
 			$output .= "<th width=200>Time Remaining</th>";
 			$output .="</tr>";
 
-			$result = getRunningListings($orderBy, $inOrder, $limit);
+			$result = $this->getRunningListings($orderBy, $inOrder, $limit);
+		
+			if (!$result->num_rows) {
 
+				$output = "<tr><td colspan='3'><center><strong>There are currently no listings :( - Please check back later!</strong></center></td>";
+
+			}
+			
 			while ($row = $result->fetch_assoc()) {
 
 				$runningListing = new runningListing($row); 
