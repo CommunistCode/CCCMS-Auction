@@ -20,7 +20,7 @@
 		foreach ($finishedListings as $finishedListing) {
 
 			echo("<tr>");	
-			echo("<td>".$finishedListing['title']."</td>");
+			echo("<td><a href='viewListing.php?id=".$finishedListing['id'].">".$finishedListing['title']."</a></td>");
 			echo("<td>".date("d-M-y",$finishedListing['date'])."</td>");
 			echo("<td>".$finishedListing['buyer']."</td>");
 			echo("</tr>");
