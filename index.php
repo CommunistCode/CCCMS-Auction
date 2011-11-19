@@ -10,7 +10,7 @@
 	require_once($fullPath."/includes/global.inc.php");
 
 	$heading = "Auction";
-	$content = "<p>".$pageTools->matchTags($pageContent['text'])."</p>";
+	$content = $pageTools->matchTags($pageContent['text']);
 
 	require_once("themes/".$pageTools->getTheme("auction")."/templates/template.inc.php");
 
