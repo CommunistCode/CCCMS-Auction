@@ -626,7 +626,7 @@
 		
 			if ($result->num_rows == 0) {
 
-				$output .= "<tr><td colspan='3'><center><strong>There are currently no listings :( - Please check back later!</strong></center></td></tr>";
+				$output .= "<tr><td colspan='3'><center><strong>There are currently no listings :( - Start a trend a <a href='createListing.php'>create one</a> or check back later!</strong></center></td></tr>";
 
 			}
 			
