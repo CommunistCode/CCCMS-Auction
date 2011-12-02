@@ -21,7 +21,7 @@
 
 		foreach ($linkArray as $link) {
 
-			echo("<li><a href='".$link['href'].">".$link['anchor']."</a></li>");
+			echo("<li><a href='".$link['href']."'>".$link['anchor']."</a></li>");
 
 		}
 
