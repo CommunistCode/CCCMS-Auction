@@ -444,17 +444,23 @@
 
 		}
 
-		public function renderLinks() {
+		public function getSidebarLinks() {
 
 			$db = new dbConn();
+			$linkArray = array();
 
 			$result = $db->selectWhere("linkName,destination","memberLinks","category='Listing Tools'",0);
 
-			while ($row=$result->fetch_assoc()) {
+			for ($i=0; $i<$result->num_rows; $i++) {
 
-				echo("<li><a href='".$row['destination']."'>".$row['linkName']."</a></li>");
+				$row = $result->fetch_assoc();
+
+				$linkArray[$i]['href'] = $row['destination'];
+				$linkArray[$i]['anchor'] = $row['linkName'];
 
 			}
+
+			return $linkArray;
 		
 		}
 
